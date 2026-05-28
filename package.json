@@ -22,7 +22,6 @@
     "start:debug": "node ./packages/evershop/dist/bin/start/index.js --debug",
     "test": "ALLOW_CONFIG_MUTATIONS=true NODE_OPTIONS=--experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./packages",
-    "prepare": "husky install",
     "start:prod": "node create-admin.js && node ./packages/evershop/dist/bin/start/index.js"
   },
   "author": "The Nguyen (https://evershop.io)",
@@ -57,5 +56,8 @@
     "@types/react-slick": "^0.23.13",
     "@types/uuid": "^10.0.0",
     "uuid": "^13.0.0"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
