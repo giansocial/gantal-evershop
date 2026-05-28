@@ -1,0 +1,106 @@
+import Area from '@components/common/Area.js';
+import { InputField } from '@components/common/form/InputField.js';
+import { SelectField } from '@components/common/form/SelectField.js';
+import { NameAndTelephone } from '@components/frontStore/customer/address/addressForm/NameAndTelephone.js';
+import { ProvinceAndPostcode } from '@components/frontStore/customer/address/addressForm/ProvinceAndPostcode.js';
+import { _ } from '@evershop/evershop/lib/locale/translate/_';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+export function CustomerAddressForm({ allowCountries = [], address = {}, areaId = 'customerAddressForm', fieldNamePrefix = 'address' }) {
+    const { watch, setValue } = useFormContext();
+    const getFieldName = (fieldName)=>{
+        return fieldNamePrefix ? `${fieldNamePrefix}.${fieldName}` : fieldName;
+    };
+    const selectedCountry = watch(getFieldName('country'), address?.country?.code || '');
+    return /*#__PURE__*/ React.createElement(Area, {
+        id: areaId,
+        className: "space-y-3",
+        coreComponents: [
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(NameAndTelephone, {
+                        fullName: address?.fullName || '',
+                        telephone: address?.telephone || '',
+                        getFieldName: getFieldName
+                    })
+                },
+                sortOrder: 10
+            },
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(InputField, {
+                        name: getFieldName('address_1'),
+                        label: _('Address'),
+                        placeholder: _('Address'),
+                        defaultValue: address?.address1 || '',
+                        required: true,
+                        validation: {
+                            required: _('Address is required')
+                        }
+                    })
+                },
+                sortOrder: 20
+            },
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(InputField, {
+                        name: getFieldName('address_2'),
+                        label: _('Address 2'),
+                        placeholder: _('Address 2'),
+                        defaultValue: address?.address2 || ''
+                    })
+                },
+                sortOrder: 30
+            },
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(InputField, {
+                        name: getFieldName('city'),
+                        label: _('City'),
+                        placeholder: _('City'),
+                        required: true,
+                        validation: {
+                            required: _('City is required')
+                        },
+                        defaultValue: address?.city || ''
+                    })
+                },
+                sortOrder: 40
+            },
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(SelectField, {
+                        defaultValue: address?.country?.code || '',
+                        label: _('Country'),
+                        name: getFieldName('country'),
+                        placeholder: _('Country'),
+                        onChange: (value)=>{
+                            setValue(getFieldName('country'), value);
+                            setValue(getFieldName('province'), '');
+                        },
+                        required: true,
+                        validation: {
+                            required: _('Country is required')
+                        },
+                        options: allowCountries
+                    })
+                },
+                sortOrder: 50
+            },
+            {
+                component: {
+                    default: /*#__PURE__*/ React.createElement(ProvinceAndPostcode, {
+                        key: selectedCountry,
+                        provinces: allowCountries.find((country)=>country.value === selectedCountry)?.provinces || [],
+                        province: address?.province || {
+                            code: ''
+                        },
+                        postcode: address?.postcode || '',
+                        getFieldName: getFieldName
+                    })
+                },
+                sortOrder: 60
+            }
+        ]
+    });
+}
