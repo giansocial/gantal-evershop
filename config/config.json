@@ -1,0 +1,38 @@
+{
+  "shop": {
+    "language": "es",
+    "timezone": "America/Lima",
+    "currency": "PEN",
+    "weightUnit": "kg",
+    "homeUrl": "http://localhost:3001"
+  },
+  "system": {
+    "file_storage": "local",
+    "admin_collection_size": 20,
+    "theme": "default",
+    "session": {
+      "maxAge": 86400000,
+      "resave": false,
+      "saveUninitialized": false,
+      "cookieSecret": "gantal-cirk-secret-2024",
+      "cookieName": "sid",
+      "adminCookieName": "admin-sid"
+    }
+  },
+  "catalog": {
+    "collectionPageSize": 12,
+    "product": { "image": { "width": 1200, "height": 1200 } },
+    "showOutOfStockProduct": false
+  },
+  "checkout": { "showShippingNote": true },
+  "pricing": {
+    "rounding": "round",
+    "precision": 2,
+    "tax": {
+      "rounding": "round",
+      "precision": 2,
+      "round_level": "total",
+      "price_including_tax": true
+    }
+  }
+}

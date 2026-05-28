@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: gantal-evershop
+    runtime: node
+    buildCommand: npm install && npm run compile && npm run compile:db && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        fromDatabase:
+          name: gantal-db
+          property: host
