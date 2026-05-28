@@ -22,7 +22,8 @@
     "start:debug": "node ./packages/evershop/dist/bin/start/index.js --debug",
     "test": "ALLOW_CONFIG_MUTATIONS=true NODE_OPTIONS=--experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./packages",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start:prod": "node create-admin.js && node ./packages/evershop/dist/bin/start/index.js"
   },
   "author": "The Nguyen (https://evershop.io)",
   "license": "GNU GENERAL PUBLIC LICENSE 3.0",
